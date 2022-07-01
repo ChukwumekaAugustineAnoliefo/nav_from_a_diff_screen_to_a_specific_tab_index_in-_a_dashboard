@@ -30,10 +30,13 @@ class _SettingsState extends State<Settings> {
       body: Center(
         child: Column(
           children: [
+            SizedBox(
+              height: 300,
+            ),
             Text(
               'Settings Page',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),

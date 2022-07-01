@@ -22,10 +22,13 @@ class _PortfolioState extends State<Portfolio> {
       body: Center(
         child: Column(
           children: [
+            SizedBox(
+              height: 300,
+            ),
             Text(
               'Portfolio Page',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
