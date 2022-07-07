@@ -5,14 +5,15 @@ import 'package:nav_to_specific_tab_from_a_diff_screen/dashboardFeature/dashboar
 import 'package:nav_to_specific_tab_from_a_diff_screen/dashboardFeature/dashboard_settings.dart';
 
 class Dashboard extends StatefulWidget {
+  int? currentProfileTab;
+  int? currentTab;
+  Dashboard({this.currentProfileTab, this.currentTab});
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
-  // Properties & Variables needed
-
-  int currentTab = 0; // to keep track of active tab index
+  // to keep track of active tab index
   final List<Widget> screens = [
     homepage(),
     Market(),
@@ -20,15 +21,22 @@ class _DashboardState extends State<Dashboard> {
     Settings(),
   ]; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = homepage(); // Our first view in viewport
+  final PageStorageBucket bucket2 = PageStorageBucket();
 
+  Widget currentScreen = homepage(); // Our first view in viewport
+  Widget currentScreen2 = Portfolio();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageStorage(
-        child: currentScreen,
-        bucket: bucket,
-      ),
+      body: widget.currentProfileTab == 2
+          ? PageStorage(
+              child: currentScreen2,
+              bucket: bucket2,
+            )
+          : PageStorage(
+              child: currentScreen,
+              bucket: bucket,
+            ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0XFF7B61FF),
         child: Icon(color: Color.fromARGB(255, 255, 255, 255), Icons.add),
@@ -53,9 +61,11 @@ class _DashboardState extends State<Dashboard> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
+                          currentScreen2 = homepage();
                           currentScreen =
                               homepage(); // if user taps on this dashboard tab will be active
-                          currentTab = 0;
+                          widget.currentProfileTab = 0;
+                          widget.currentTab = 0;
                         });
                       },
                       child: Column(
@@ -63,16 +73,20 @@ class _DashboardState extends State<Dashboard> {
                         children: <Widget>[
                           Icon(
                             Icons.home,
-                            color: currentTab == 0
+                            color: widget.currentProfileTab == 0
                                 ? Color(0xFF7B61FF)
-                                : Color(0xFFFFFFFF),
+                                : widget.currentTab == 0
+                                    ? Color(0xFF7B61FF)
+                                    : Color(0xFFFFFFFF),
                           ),
                           Text(
                             'Home',
                             style: TextStyle(
-                              color: currentTab == 0
+                              color: widget.currentProfileTab == 0
                                   ? Color(0xFF7B61FF)
-                                  : Color(0xFFFFFFFF),
+                                  : widget.currentTab == 0
+                                      ? Color(0xFF7B61FF)
+                                      : Color(0xFFFFFFFF),
                             ),
                           ),
                         ],
@@ -82,9 +96,11 @@ class _DashboardState extends State<Dashboard> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
+                          currentScreen2 = Market();
                           currentScreen =
                               Market(); // if user taps on this dashboard tab will be active
-                          currentTab = 1;
+                          widget.currentProfileTab = 1;
+                          widget.currentTab = 1;
                         });
                       },
                       child: Column(
@@ -92,16 +108,20 @@ class _DashboardState extends State<Dashboard> {
                         children: <Widget>[
                           Icon(
                             Icons.bar_chart,
-                            color: currentTab == 1
+                            color: widget.currentProfileTab == 1
                                 ? Color(0xFF7B61FF)
-                                : Color(0xFFFFFFFF),
+                                : widget.currentTab == 1
+                                    ? Color(0xFF7B61FF)
+                                    : Color(0xFFFFFFFF),
                           ),
                           Text(
                             'Market',
                             style: TextStyle(
-                              color: currentTab == 1
+                              color: widget.currentTab == 1
                                   ? Color(0xFF7B61FF)
-                                  : Color(0xFFFFFFFF),
+                                  : widget.currentProfileTab == 1
+                                      ? Color(0xFF7B61FF)
+                                      : Color(0xFFFFFFFF),
                             ),
                           ),
                         ],
@@ -119,9 +139,11 @@ class _DashboardState extends State<Dashboard> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
+                          currentScreen2 = Portfolio();
                           currentScreen =
                               Portfolio(); // if user taps on this dashboard tab will be active
-                          currentTab = 2;
+                          widget.currentProfileTab = 2;
+                          widget.currentTab = 2;
                         });
                       },
                       child: Column(
@@ -129,16 +151,20 @@ class _DashboardState extends State<Dashboard> {
                         children: <Widget>[
                           Icon(
                             Icons.pie_chart,
-                            color: currentTab == 2
+                            color: widget.currentProfileTab == 2
                                 ? Color(0xFF7B61FF)
-                                : Color(0xFFFFFFFF),
+                                : widget.currentTab == 2
+                                    ? Color(0xFF7B61FF)
+                                    : Color(0xFFFFFFFF),
                           ),
                           Text(
                             'Porfolio',
                             style: TextStyle(
-                              color: currentTab == 2
+                              color: widget.currentProfileTab == 2
                                   ? Color(0xFF7B61FF)
-                                  : Color(0xFFFFFFFF),
+                                  : widget.currentTab == 2
+                                      ? Color(0xFF7B61FF)
+                                      : Color(0xFFFFFFFF),
                             ),
                           ),
                         ],
@@ -148,9 +174,11 @@ class _DashboardState extends State<Dashboard> {
                       minWidth: 40,
                       onPressed: () {
                         setState(() {
+                          currentScreen2 = Settings();
                           currentScreen =
                               Settings(); // if user taps on this dashboard tab will be active
-                          currentTab = 3;
+                          widget.currentProfileTab = 3;
+                          widget.currentTab = 3;
                         });
                       },
                       child: Column(
@@ -158,16 +186,20 @@ class _DashboardState extends State<Dashboard> {
                         children: <Widget>[
                           Icon(
                             Icons.settings,
-                            color: currentTab == 3
+                            color: widget.currentTab == 3
                                 ? Color(0xFF7B61FF)
-                                : Color(0xFFFFFFFF),
+                                : widget.currentProfileTab == 3
+                                    ? Color(0xFF7B61FF)
+                                    : Color(0xFFFFFFFF),
                           ),
                           Text(
                             'Settings',
                             style: TextStyle(
-                              color: currentTab == 3
+                              color: widget.currentTab == 3
                                   ? Color(0xFF7B61FF)
-                                  : Color(0xFFFFFFFF),
+                                  : widget.currentProfileTab == 3
+                                      ? Color(0xFF7B61FF)
+                                      : Color(0xFFFFFFFF),
                             ),
                           ),
                         ],
